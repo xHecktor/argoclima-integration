@@ -2,14 +2,14 @@
   "domain": "argoclima",
   "name": "Argoclima",
   "codeowners": [
-    "@nyffchanium"
+    "@xHecktor"
   ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/nyffchanium/argoclima-integration",
+  "documentation": "https://github.com/xHecktor/argoclima-integration",
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/nyffchanium/argoclima-integration/issues",
+  "issue_tracker": "https://github.com/xHecktor/argoclima-integration/issues",
   "requirements": [],
   "version": "1.2.0"
 }
