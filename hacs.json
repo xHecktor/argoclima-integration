@@ -3,5 +3,5 @@
   "homeassistant": "2022.7.0",
   "hacs": "1.6.0",
   "hide_default_branch": true,
-  "render_readme": true,
+  "render_readme": true
 }

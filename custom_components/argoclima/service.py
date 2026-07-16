@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 from datetime import time as dt_time
 from typing import Any
-from typing import cast
 
 import homeassistant.helpers.config_validation as cv
 import homeassistant.helpers.device_registry as dr
@@ -11,7 +10,7 @@ from custom_components.argoclima.const import DOMAIN
 from custom_components.argoclima.types import ArgoWeekday
 from custom_components.argoclima.update_coordinator import ArgoDataUpdateCoordinator
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.service import verify_domain_control
+from homeassistant.core import ServiceCall
 from homeassistant.util import dt as dt_util
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,7 +20,7 @@ ATTR_WEEKDAY = "weekday"
 
 
 async def setup_service(hass: HomeAssistant):
-    async def _set_time(call, **kwargs) -> None:
+    async def _set_time(call: ServiceCall) -> None:
         device: dr.DeviceEntry = call.data.get(ATTR_DEVICE)
         time: dt_time = call.data.get(ATTR_TIME)
         weekday: ArgoWeekday = call.data.get(ATTR_WEEKDAY)
@@ -72,16 +71,16 @@ async def setup_service(hass: HomeAssistant):
 
     def device(value: Any) -> dr.DeviceEntry:
         """Validate that the device exists."""
-        device_registry = cast(dr.DeviceRegistry, hass.data[dr.DATA_REGISTRY])
-        try:
-            return device_registry.devices[str(value)]
-        except:  # noqa: E722 pylint: disable=bare-except
+        device_registry = dr.async_get(hass)
+        device_entry = device_registry.async_get(str(value))
+        if device_entry is None:
             raise vol.Invalid(f"Could not find device with ID {value}")
+        return device_entry
 
     hass.services.async_register(
         DOMAIN,
         "set_time",
-        verify_domain_control(hass, DOMAIN)(_set_time),
+        _set_time,
         schema=vol.Schema(
             {
                 vol.Required(ATTR_DEVICE): device,
