@@ -25,7 +25,7 @@ This is an unofficial Home Assistant integration for Argo climate control device
 
 ## Changes in this fork
 
-Verified against an Argo Ulisse 13 DCI Eco WiFi.
+Tested against an Argo Ulisse 13 DCI Eco WiFi (2026 model).
 
 - **Home Assistant 2026.x compatibility**
   - Removed the deprecated `verify_domain_control` service wrapper; the

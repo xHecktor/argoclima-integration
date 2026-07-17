@@ -18,7 +18,7 @@ communication. All credit for the original work goes to the upstream author.
 
 ## Changes in this fork
 
-Verified against an Argo Ulisse 13 DCI Eco WiFi.
+Tested against an Argo Ulisse 13 DCI Eco WiFi (2026 model).
 
 - Home Assistant 2026.x compatibility (removed the deprecated
   `verify_domain_control` wrapper, modern device registry access via
